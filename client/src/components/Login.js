@@ -5,7 +5,7 @@ import axios from 'axios';
 const Login = (props) => {
 
     const [formState, setFormState] = useState({
-        isLoading: false,
+       
         credentials: {
             username: "",
             password: ""

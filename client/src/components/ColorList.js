@@ -8,14 +8,18 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log("colorlist",colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const {push}=useHistory();
   const {id}=useParams();
-  const item = colors.find(
+  console.log("id",id);
+ {
+   const item = colors.find(
     (thing) => `${thing.id}` === colors.match.params.id
   );
+  
+   }
 
   const editColor = color => {
     setEditing(true);
@@ -43,10 +47,10 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    color.preventDefault();
+   // color.preventDefault();
     axios
     ///api/colors/123
-    .delete(`http://localhost:5000/api/colors/${item.id}`)
+    .delete(`http://localhost:5000/api/colors/${id}`)
     .then((res)=>{
 
     })
