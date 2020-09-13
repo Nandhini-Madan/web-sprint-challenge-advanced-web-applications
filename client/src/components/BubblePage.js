@@ -16,6 +16,8 @@ const BubblePage = () => {
       .then((res)=>{
         console.log("colorsList",res.data);
         setColorList(res.data);
+        console.log("setcolorlist",setColorList);
+        console.log("updatecolor",colorList);
       })
       .catch((err)=>{
         console.log("error in bubblepage",err);

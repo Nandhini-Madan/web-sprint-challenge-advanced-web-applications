@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div className="App">
       <Link to="/login">Login</Link>
-        <Link to="/protected">Friends List</Link>
+        <Link to="/protected">Color List</Link>
         
         {/* 
           Build a PrivateRoute component that will 

@@ -13,13 +13,13 @@ const ColorList = ({ colors, updateColors }) => {
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const {push}=useHistory();
   const {id}=useParams();
-  console.log("id",id);
- {
+  console.log("id",colorToEdit.id);
+ {/*
    const item = colors.find(
     (thing) => `${thing.id}` === colors.match.params.id
   );
   
-   }
+   */ }
 
   const editColor = color => {
     setEditing(true);
@@ -32,7 +32,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
     axios
-    .put(`http://localhost:5000/api/colors/:${id}`,colorToEdit)
+    .put(`http://localhost:5000/api/colors/${colorToEdit.id}`,colorToEdit)
     .then((res)=>{
       //res.data
       console.log("color editted",res.data)
@@ -50,9 +50,12 @@ const ColorList = ({ colors, updateColors }) => {
    // color.preventDefault();
     axios
     ///api/colors/123
-    .delete(`http://localhost:5000/api/colors/${id}`)
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
     .then((res)=>{
 
+    })
+    .catch((err)=>{
+      console.log("error in colorlist",err)
     })
 
   };
