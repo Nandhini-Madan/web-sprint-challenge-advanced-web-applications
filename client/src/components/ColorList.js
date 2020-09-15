@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWIthAuth";
+import  axiosWithAuth  from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -12,9 +12,9 @@ const ColorList = ({ colors, updateColors }) => {
   console.log("colorlist", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const { push } = useHistory();
-  const { id } = useParams();
-  console.log("id", colorToEdit.id);
+  //const { push } = useHistory();
+//  const { id } = useParams();
+//  console.log("id", colorToEdit.id);
   {/*
    const item = colors.find(
     (thing) => `${thing.id}` === colors.match.params.id
@@ -24,9 +24,9 @@ const ColorList = ({ colors, updateColors }) => {
 
   const editColor = color => {
     setEditing(true);
-    console.log("color",color);
+    console.log("color", color);
     setColorToEdit(color);
-   
+
   };
 
   const saveEdit = e => {
@@ -34,15 +34,21 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    axiosWithAuth()
+    axiosWithAuth
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then((res) => {
         //res.data
         console.log("color editted", res.data)
-        editColor(res.data);
-        colors.setColorToEdit(res.data);
-    
-     
+        // editColor(res.data);
+        //   updateColors(res.data);
+        updateColors(colors.map(color => {
+          if (color.id === res.id) {
+            return res.data;
+          }
+          return color;
+        }))
+     //   push("/api/colors");
+
 
       })
       .catch((err) => {
@@ -60,9 +66,10 @@ const ColorList = ({ colors, updateColors }) => {
       .then((res) => {
         console.log("Deleted Color ID", res.data);
         //  editColor(res.data);
-       const newItems = colors.filter(v => v.id !== color.id) 
-       updateColors(newItems);
-     
+        const newItems = colors.filter(v => v.id !== color.id)
+        updateColors(newItems);
+
+
       })
       .catch((err) => {
         console.log("error in colorlist", err)

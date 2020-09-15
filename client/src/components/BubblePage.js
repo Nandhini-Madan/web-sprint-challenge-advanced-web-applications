@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import fetchColors from "../api/fetchColors";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
-import { axiosWithAuth } from "../utils/axiosWIthAuth";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
@@ -11,11 +11,12 @@ const BubblePage = () => {
   // set that data to the colorList state property
   
     const getData=()=>{
-      axiosWithAuth()
-      .get("/api/colors")
+      //axiosWithAuth()
+      //.get("/api/colors")
+      fetchColors()
       .then((res)=>{
-        console.log("colorsList",res.data);
-        setColorList(res.data);
+        console.log("colorsList",res);
+        setColorList(res);
       //  console.log("setcolorlist",setColorList);
       //  console.log("updatecolor",colorList);
       })
@@ -29,10 +30,11 @@ const BubblePage = () => {
     },[]);
     
   return (
-    <>
+    <div className="flex-column">
+    <h1>Colors</h1>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
-    </>
+    </div>
   );
 };
 
