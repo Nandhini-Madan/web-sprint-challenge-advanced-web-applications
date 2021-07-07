@@ -14,7 +14,7 @@ const Bubbles = ({ colors }) => {
 
   return (
     <div className="bubble-wrap">
-      <p>bubbles</p>
+      <p >bubbles</p>
       <Svg width={400} height={400}>
         <Pack
           data={{
@@ -37,6 +37,7 @@ const Bubbles = ({ colors }) => {
                       cy={y}
                       r={r}
                       fill={colors[i].code.hex}
+                      data-testid="bubbles"
                     />
                   );
                 }
